@@ -8,7 +8,11 @@ const apiKey = "d1152af9757a55d135e39e8e140015f6";
 
 export const MovieSearch = () => {
 
-    
+    const [searchRequest, setSearchRequest] = useState("");
+
+    const handleInputChange = (e) => {
+        setSearchRequest(e.target.value);
+    }; 
     
       return (
 
