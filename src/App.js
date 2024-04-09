@@ -1,12 +1,21 @@
 
 import './App.css';
-import { MovieSearch } from './components/MovieSearch';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { MovieDetail } from "./pages/MovieDetail/MovieDetail";
+import  Home from "./pages/home/home";
 
-function App() {
+
+const App = () => {
   return (
-   <>
-   <MovieSearch />
-   </>
+   <div className='App'>
+     <Router>
+       <Routes>
+         <Route index path = "/" element = {<Home />} />
+       </Routes>
+     </Router>
+   </div>
+   
+
   );
 }
 
