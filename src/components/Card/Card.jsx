@@ -1,8 +1,8 @@
 import React from "react";
-import "./MovieList.css";
+import "./Card.css";
 
 
-const MovieList = () => {
+const Card = () => {
 
     return (
 
@@ -15,4 +15,4 @@ const MovieList = () => {
 
 };
 
-export default MovieList;
+export default Card;
