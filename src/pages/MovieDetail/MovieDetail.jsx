@@ -122,7 +122,7 @@ export const MovieDetail = () => {
               {company.logo_path && (
                 <span className="productionCompanyImage">
                   <img
-                    className="movie__productionComapany"
+                    className="movie__productionCompany"
                     src={
                       "https://image.tmdb.org/t/p/original" + company.logo_path
                     }
