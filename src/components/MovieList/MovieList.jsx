@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import "./MovieList.css";
 import Cards from "../Card/Card";
 import { type } from "@testing-library/user-event/dist/type";
+import { useParams } from "react-router-dom";
+
 
 
 const MovieList = () => {
 
-    const [movieList, setMovieList] = useState([]); 
+    const [movieList, setMovieList] = useState([]);
+    const { type } = useParams();
 
   useEffect(() => {
     getData(); 
   }, []); 
 
+  useEffect(() => {
+    getData(); 
+  }, [type]);
 
   const getData = () => {
     fetch(
@@ -36,8 +42,6 @@ const MovieList = () => {
         ))};
             </div>
         </div>
-
-        
     );
 
     
