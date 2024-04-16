@@ -7,14 +7,41 @@ import MovieList from "../../components/MovieList/MovieList";
 
 const Home = () => {
     const [popularMovies, setPopularMovies] = useState([]);
+    const [upComingMovies, setUpComingMovies] = useState([]);
+    const [topRatedMovies, setTopRatedMovies] = useState([]);
+    const [genres, setGenres] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    
   
     useEffect(() => {
-      fetch(
-        "https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US"
-      )
-        .then((res) => res.json())
-        .then((data) => setPopularMovies(data.results));
+      fetchGenres();
+      fetchMovies('popular', setPopularMovies);
+      fetchMovies('upcoming', setUpComingMovies);
+      fetchMovies('toprated', setTopRatedMovies);
+
     }, []);
+
+    const fetchGenres = async() => {
+      try{
+        const response = await fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US');
+        const data = await response.json();
+        setGenres(data.genres);
+      }
+      catch(error) {
+        console.error('Error fetching genres:', error);
+      }
+    };
+
+    const fetchMovies = async(type, setMovies) => {
+      try{
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${type}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US&page=1`);
+        const data = await response.json();
+        setMovies(data.results);
+      }
+      catch(error) {
+        console.error(`Error fetching ${type} movies:`, error);
+      }
+    }; 
 
     return (
       <>
