@@ -16,24 +16,28 @@ const MovieList = () => {
 
   const getData = () => {
     let url;
-    switch(type) {
-      case 'top_rated': url=`https://api.themoviedb.org/3/movie/top_rated?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
-      break;
-      case 'top_rated': url=`https://api.themoviedb.org/3/movie/upcoming?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
-      default: url=`https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
+
+    switch (type) {
+      case "top_rated":
+        url = `https://api.themoviedb.org/3/movie/top_rated?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
+        break;
+      case "upcoming":
+        url = `https://api.themoviedb.org/3/movie/upcoming?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
+        break;
+      default:
+        url = `https://api.themoviedb.org/3/movie/popular?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`;
     }
-    fetch(
-      `https://api.themoviedb.org/3/movie/${
-        type ? type : "popular"
-      }?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
-    )
+
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         let filteredMovies = data.results;
 
         if (yearFilter) {
           filteredMovies = filteredMovies.filter(
-            (movie) => new Date(movie.release_date).getFullYear() === parseInt(yearFilter)
+            (movie) =>
+              new Date(movie.release_date).getFullYear() ===
+              parseInt(yearFilter)
           );
         }
 
@@ -57,7 +61,9 @@ const MovieList = () => {
 
   return (
     <div className="movie__list">
-      <h2 className="list__title">{(type ? type : "POPULAR").toUpperCase()}</h2>
+      <h2 className="list__title">
+        {(type ? type.toUpperCase() : "POPULAR").toUpperCase()}
+      </h2>
 
       <div className="filters">
         <label>
@@ -67,7 +73,11 @@ const MovieList = () => {
 
         <label>
           Rating:
-          <input type="text" value={ratingFilter} onChange={handleRatingChange} />
+          <input
+            type="text"
+            value={ratingFilter}
+            onChange={handleRatingChange}
+          />
         </label>
       </div>
 
