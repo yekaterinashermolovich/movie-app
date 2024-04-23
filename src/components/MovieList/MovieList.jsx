@@ -5,6 +5,8 @@ import Cards from "../Card/Card";
 
 const MovieList = () => {
   const [movieList, setMovieList] = useState([]);
+  const [yearFilter, setYearFilter] = useState([]);
+  const [ratingFilter, setRatingFilter] = useState([]);
   const { type } = useParams();
 
   useEffect(() => {
@@ -13,7 +15,7 @@ const MovieList = () => {
 
   useEffect(() => {
     getData();
-  }, [type]);
+  }, [type, setYearFilter, setRatingFilter]);
 
   const getData = () => {
     fetch(
@@ -22,7 +24,16 @@ const MovieList = () => {
       }?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
     )
       .then((res) => res.json())
-      .then((data) => setMovieList(data.results));
+      .then((data) => {
+        let filteredMovies = data.results;
+        if(yearFilter) {
+          filteredMovies = filteredMovies.filter((movie) => new Date(movie.release_date).getFullYear()===parseInt(setYearFilter)) /*esli cto pomenayem na drugoy filter */
+        };
+        if(ratingFilter) {
+          filteredMovies = filteredMovies.filter((movie) => movie.vote_average >= parseFloat(ratingFilter));
+        }
+        setMovieList(filteredMovies);
+      });
   };
 
   return (
