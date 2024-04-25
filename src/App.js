@@ -5,6 +5,7 @@ import { MovieDetail } from "./pages/MovieDetail/MovieDetail";
 import Header from "./components/header/Header";
 import  Home from "./pages/home/home";
 import MovieList  from "./components/MovieList/MovieList";
+import FavoriteMovies from './pages/favoriteMovies/favoriteMovies';
 
 
 const App = () => {
@@ -15,9 +16,10 @@ const App = () => {
         <Routes>
           <Route index path="/" element={<Home />}></Route>
           {/* маршрут должен быть активирован при совпадении с корневым путем */}
-          <Route path="movie/:id" element={<MovieDetail />}></Route>
-          <Route path="movies/:type" element={<MovieList />}></Route>
-          <Route path="/*" element={<h1>Error Page</h1>}></Route>
+          <Route path="movie/:id" element={<MovieDetail />} />
+          <Route path="movies/:type" element={<MovieList />} />
+          <Route path="favorites" element={<FavoriteMovies />} />
+          <Route path="/*" element={<h1>Error Page</h1>} />
         </Routes>
       </Router>
     </div>
