@@ -20,6 +20,16 @@ export const MovieDetail = () => {
       .then((data) => setMovieDetail(data));
   };
 
+  const handleAddToFavorites =() => {
+    const storedFavorites = 
+    JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+    if(!storedFavorites.some((fav) => fav.id === currentMovieDetail.id)) {
+      const updateFavorites = [...storedFavorites, currentMovieDetail];
+      localStorage.setItem("favoriteMovies", JSON.stringify(updateFavorites));
+    }
+    
+  };
+
   return (
     <div className="movie">
       <div className="movie__intro">
@@ -40,6 +50,7 @@ export const MovieDetail = () => {
               }`}
             />
           </div>
+          <button onClick={handleAddToFavorites}>Add to Favorites</button>
         </div>
         <div className="movie__detailRight">
           <div className="movie__detailRightTop">
