@@ -7,6 +7,7 @@ import MovieList from "../../components/MovieList/MovieList";
 
 const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
+  const [favoriteMovies, setFavoriteMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [genres, setGenres] = useState([]);
@@ -58,6 +59,13 @@ const Home = () => {
   const filteredPopularMovies = filterMoviesByGenre(popularMovies);
   const filteredUpcomingMovies = filterMoviesByGenre(upcomingMovies);
   const filteredTopRatedMovies = filterMoviesByGenre(topRatedMovies);
+  const handleAddToFavorites = (movieId) => {
+    const movieToAdd = popularMovies.find((movie) => movie.id === movieId);
+    if(movieToAdd && !favoriteMovies.includes(movieToAdd)) {
+      setFavoriteMovies([...favoriteMovies, movieToAdd]);
+    }
+
+  };
 
   return (
     <>
