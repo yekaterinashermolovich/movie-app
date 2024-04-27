@@ -64,4 +64,30 @@
     border: 2px solid #ccc;
     border-radius: 5px;
   }
+
+  @media screen and (max-width: 767px) and (min-width: 360px) {
+    
+    .posterImage {
+        max-height:max-content; 
+        height: 393px;
+          
+    }
+
+    .posterImage__title {
+        font-size:large;
+        }
+    .posterImage__description {
+        display: none;
+    }  
+    
+    .posterImage__runtime {
+        font-size:large;
+
+    }
+
+    .posterImage__runtime {
+        display: flex;
+        justify-content: center;
+    }
+}
   

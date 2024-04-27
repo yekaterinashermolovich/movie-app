@@ -28,3 +28,42 @@ a > span:hover {
     cursor: pointer;
 
 }
+
+@media screen and (max-width: 767px) and (min-width: 360px) {
+    .headerLeft {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 10%;
+    }
+
+    .headerLeft a {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+    }
+
+    .genre-filter-container {
+        display: flex;
+        align-items: center;
+        margin: 0 5rem;
+        padding: .8rem 0;
+        justify-content: space-between;
+    }
+
+    .slider animated {
+        width: fit-content;
+    }
+
+    .header {
+        margin: 0 5rem;
+        
+
+}
+
+.posterImage__description {
+    text-overflow: ellipsis;
+}
+
+}

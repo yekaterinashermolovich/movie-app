@@ -70,15 +70,6 @@ const MovieList = () => {
           Year:
           <input type="text" value={yearFilter} onChange={handleYearChange} />
         </label>
-
-        <label>
-          Rating:
-          <input
-            type="text"
-            value={ratingFilter}
-            onChange={handleRatingChange}
-          />
-        </label>
       </div>
 
       <div className="list__cards">

@@ -161,3 +161,24 @@
     display: flex;
     justify-content: center;
   }
+
+  @media screen and (max-width: 767px) and (min-width: 360px) {
+    
+    .movie {
+        max-height:auto;   
+}
+
+   .movie__intro img {
+    width: 10%;
+
+}
+
+.movie__credits {
+    display: flex;
+    align-items: flex-start;
+}
+
+.movie__director img {
+    width: 50%;
+}
+  }
