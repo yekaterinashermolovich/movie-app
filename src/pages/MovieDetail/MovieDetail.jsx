@@ -4,20 +4,31 @@ import { useParams } from "react-router-dom";
 
 export const MovieDetail = () => {
   const [currentMovieDetail, setMovieDetail] = useState();
+  const [cast, setCast] = useState([]);
+  const [director, setDirector] = useState({});
 
   const { id } = useParams();
   useEffect(() => {
-    getData();
+    fetchData();
     window.scrollTo(0, 0);
   }, []);
 
-  const getData = () => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
-    )
-      /* `d1152af9757a55d135e39e8e140015f6` to check the key */
-      .then((res) => res.json())
-      .then((data) => setMovieDetail(data));
+  const fetchData = async () => {
+    try {
+      const movieResponse = await fetch (`https://api.themoviedb.org/3/movie/${id}?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US`
+      );
+      const movieData = await movieResponse.json();
+      setMovieDetail(movieData);
+      const creditsResponse = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=4e44d9029b1270a757cddc766a1bcb63&language=en-US0`
+      );
+      const creditsData = await creditsResponse.json();
+      const castData = creditsData.cast.slice(0,5);
+      const directorData = creditsData.crew.find((person) => person.job === 'Director');
+      setDirector(directorData);
+    }
+      catch (error) {
+        console.error('Error fetching Movie data:', error);
+      }
   };
 
   const handleAddToFavorites =() => {
@@ -48,6 +59,7 @@ export const MovieDetail = () => {
               src={`https://image.tmdb.org/t/p/original${
                 currentMovieDetail ? currentMovieDetail.poster_path : ""
               }`}
+              alt = "Imdb image"
             />
           </div>
           <button onClick={handleAddToFavorites}>Add to Favorites</button>
@@ -80,17 +92,17 @@ export const MovieDetail = () => {
             <div className="movie__genres">
               {currentMovieDetail && currentMovieDetail.genres
                 ? currentMovieDetail.genres.map((genre) => (
-                    <>
-                      <span className="movie__genre" id={genre.id}>
+                    
+                      <span className="movie__genre" key={genre.id}>
                         {genre.name}
                       </span>
-                    </>
+                    
                   ))
                 : ""}
             </div>
           </div>
           <div className="movie__detailRightBottom">
-            <div className="synopsisText">Synopsis</div>
+            <div className="synopsisText">Overview</div>
             <div>{currentMovieDetail ? currentMovieDetail.overview : ""}</div>
           </div>
         </div>
