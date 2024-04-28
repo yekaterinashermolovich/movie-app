@@ -157,15 +157,24 @@
   }
 
   .movie__director {
-    max-width: 50%;
+    max-width: 35%;
     display: flex;
     justify-content: center;
+  }
+
+  .movie__directorName {
+    margin-left: 10px;
+    text-wrap: nowrap;
   }
 
   @media screen and (max-width: 767px) and (min-width: 360px) {
     
     .movie {
         max-height:auto;   
+}
+
+.movie__detail {
+  margin-right: 38%;
 }
 
    .movie__intro img {
@@ -179,6 +188,6 @@
 }
 
 .movie__director img {
-    width: 50%;
+    width: 35%;
 }
   }
