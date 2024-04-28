@@ -15,7 +15,6 @@ const App = () => {
         <Header />
         <Routes>
           <Route index path="/" element={<Home />}></Route>
-          {/* маршрут должен быть активирован при совпадении с корневым путем */}
           <Route path="movie/:id" element={<MovieDetail />} />
           <Route path="movies/:type" element={<MovieList />} />
           <Route path="favorites" element={<FavoriteMovies />} />
